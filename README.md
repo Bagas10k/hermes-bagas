@@ -34,31 +34,27 @@ Use any model you want — [Nous Portal](https://portal.nousresearch.com), OpenR
 
 ## Quick Install
 
-### Linux, macOS, WSL2
+### Hermes Bagas fork — Linux first
+
+This fork currently treats Ubuntu/Debian x86_64 as its primary release target. Authenticate GitHub, then install from the clone:
 
 ```bash
-curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+git clone git@github.com:Bagas10k/hermes-bagas.git
+cd hermes-bagas
+./install.sh
 ```
 
-### Windows (native, PowerShell)
+The root installer follows this fork's `origin` and the checked-out branch instead of silently switching back to the Nous Research repository. See [the Linux install contract](docs/LINUX_INSTALL.md) for isolated testing, rollback, and the verified-platform matrix.
 
-> **Heads up:** Native Windows runs Hermes without WSL — CLI, gateway, TUI, and tools all work natively. If you'd rather use WSL2, the Linux/macOS one-liner above works there too. Found a bug? Please [file issues](https://github.com/NousResearch/hermes-agent/issues).
+The cross-platform installers inherited from upstream remain in the repository, but this fork does not claim macOS, native Windows, WSL2, ARM64, or other Linux distributions as verified until their clean-host release gates pass.
 
-Run this in PowerShell:
+### Upstream Hermes Agent
 
-```powershell
-iex (irm https://hermes-agent.nousresearch.com/install.ps1)
-```
+The original cross-platform installation instructions remain at the [Nous Research documentation](https://hermes-agent.nousresearch.com/docs/getting-started/installation).
 
-The source installer delegates Python 3.14, Node.js, npm, ripgrep, FFmpeg,
-and Python dependencies to PM. If Git is absent, it stages the verified Git
-for Windows archive in Hermes' tool store. It does not replace your system Git.
-See [installation methods](https://hermes-agent.nousresearch.com/docs/getting-started/installation)
-for the separate MSIX/App Installer package and its update ownership.
+### Other platforms
 
-> **Android / Termux:** A signed APT repository is available for aarch64 devices, with a `stable` channel (tagged releases) and a prerelease `canary` channel. The package includes Python, Node.js, and the TUI. Use the [Termux guide](https://hermes-agent.nousresearch.com/docs/getting-started/termux), not the desktop/server installer script.
->
-> **Windows:** Native Windows is fully supported — the PowerShell one-liner above installs everything. If you'd rather use WSL2, the Linux command works there too. Native Windows install lives under `%LOCALAPPDATA%\hermes`; WSL2 installs under `~/.hermes` as on Linux.
+The inherited macOS, Windows, WSL2, ARM64, and Termux paths belong to upstream Hermes Agent. They remain available for future fork verification, but they are not release targets for this fork yet. Use the [upstream installation guide](https://hermes-agent.nousresearch.com/docs/getting-started/installation) if you need one of those platforms today.
 
 After installation:
 
