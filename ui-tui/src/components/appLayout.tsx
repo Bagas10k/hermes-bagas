@@ -36,7 +36,7 @@ import { FpsOverlay } from './fpsOverlay.js'
 import { GoalBar } from './goalBar.js'
 import { HelpHint } from './helpHint.js'
 import { Journey } from './journey.js'
-import { LiveWorkspacePanel } from './liveWorkspacePanel.js'
+import { LiveWorkspaceSidePanel } from './liveWorkspacePanel.js'
 import { LoopBar } from './loopBar.js'
 import { MessageLine } from './messageLine.js'
 import { PetKitty, PetSprite } from './petSprite.js'
@@ -621,11 +621,7 @@ export const AppLayout = memo(function AppLayout({
           )}
           {!overlay.agents && !overlay.journey && !NATIVE_MODE && composer.cols >= 110 && (
             <Box flexShrink={0} marginLeft={1}>
-              <LiveWorkspacePanel
-                cols={34}
-                status={ui.status}
-                t={ui.theme}
-              />
+              <LiveWorkspaceSidePanel cols={34} />
             </Box>
           )}
           {!overlay.agents && !overlay.journey && <AmbientRail side="right" />}

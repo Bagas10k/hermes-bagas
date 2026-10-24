@@ -23,6 +23,8 @@ export interface ProcessRow {
   /** Latest non-empty output line while running; the exit verdict once finished. */
   detail: string
   elapsedSeconds: number
+  /** Exit status once the process finished; null while running or unknown. */
+  exitCode: number | null
   id: string
   /** Seconds since exit; 0 while running. */
   sinceExitSeconds: number
@@ -94,6 +96,7 @@ export const buildProcessRows = (processes: readonly ProcessEntry[], nowMs: numb
       command: (entry.command ?? '').replace(/\s+/g, ' ').trim() || 'background process',
       detail: lastOutputLine(entry.output_preview),
       elapsedSeconds: Math.max(0, entry.uptime_seconds ?? 0) - sinceExitSeconds,
+      exitCode: status === 'running' ? null : (entry.exit_code ?? null),
       id: entry.session_id,
       sinceExitSeconds,
       status
